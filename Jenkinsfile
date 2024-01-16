@@ -4,12 +4,12 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        git branch: 'main', url: 'git@github.com:eddzaa/cicdproject1.git'
+        git branch: 'master', url: 'git@github.com:eddzaa/cicdproject1.git'
       }
     }
  stage('Pull Changes') {
       steps {
-        sh 'git pull origin main'
+        sh 'git pull origin master'
         echo "WebHook Is Successfull Change"
       }
       }
