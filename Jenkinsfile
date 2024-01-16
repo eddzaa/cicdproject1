@@ -31,17 +31,23 @@ stage ('Build') {
     }
 
 
-stage('Sonar Analysis') {
+ stage('Sonar Analysis') {
       environment {
-        scannerHome = tool 'SonarQubeScanner'
+        scannerHome = tool 'sonar-scanner'
       }
       steps {
         echo '<--------------- Sonar Analysis started  --------------->'
-                withSonarQubeEnv('SonarQubeScanner') {
-                sh "${scannerHome}/bin/sonar-scanner"
-                }       
-         }
+        //         withSonarQubeEnv('sonar-cloud') {
+        //         sh "${scannerHome}/bin/sonar-scanner"
+
+        // }
+        withSonarQubeEnv('sonar-cloud') {
+          sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=cicdproject1 -Dsonar.organization=eddzaa -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=8a59dd629036b1528b4991d99c4df0ceafd4b0d1'
+          echo '<--------------- Sonar Analysis stopped  --------------->'
+        }
       }
+    }
+
 stage('Quality Gate') {
       steps {
         script {
