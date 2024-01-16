@@ -4,7 +4,7 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        git branch: 'master', url: 'git@github.com:eddzaa/cicdproject1.git'
+        git branch: 'master', url: 'https://github.com/eddzaa/cicdproject1.git'
       }
     }
  stage('Pull Changes') {
